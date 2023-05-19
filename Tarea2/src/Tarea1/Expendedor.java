@@ -10,7 +10,7 @@ import Tarea1.Deposito;
  * @version versión 1, 28 de abril de 2023
  * @see PagoInsuficienteException , PagoIncorrectoException , NoHayProductoException
  */
-class Expendedor{
+public class Expendedor{
     
     /*Constantes utilizadas en la selección del producto.*/
     public static final int COCA = 1;
@@ -25,11 +25,14 @@ class Expendedor{
     private int precioB; //Almacena el precio de cada bebida.
     private int precioD; //Almacena el precio de cada dulce.
 
-    private Deposito<CocaCola> dCoca;     //Déposito de bebida Cocacola.
-    private Deposito<Sprite> dSprite;     //Déposito de bebida Sprite.
-    private Deposito<Snickers> dSnickers; //Déposito de dulce Tarea1.Snickers.
-    private Deposito<Super8> dSuper8;     //Déposito de dulce Super 8.
-    private Deposito<Moneda> dVuelto;     //Déposito de monedas.
+    private Producto p; //Almacena el producto en un depósito especial para su posterior retiro.
+
+    private Deposito<CocaCola> dCoca;     //Depósito de bebida CocaCola.
+    private Deposito<Sprite> dSprite;     //Depósito de bebida Sprite.
+    private Deposito<Snickers> dSnickers; //Depósito de dulce Tarea1.Snickers.
+    private Deposito<Super8> dSuper8;     //Depósito de dulce Super 8.
+    private Deposito<Moneda> dVuelto;     //Depósito de monedas.
+    private Deposito<Moneda> dCompra;  //Depósito de monedas compra exitosa.
 
     /*Método constructor clase Tarea1.Expendedor
     * @param n primero int
@@ -39,7 +42,9 @@ class Expendedor{
     public Expendedor(int n, int precioB, int precioD){ //Presenta 3 entradas: cantidad de productos, precio de bebidas y precio de dulces.
         this.precioB = precioB;
         this.precioD = precioD;
+        this.p = null;
         this.dVuelto = new Deposito<Moneda>();
+        this.dCompra = new Deposito<Moneda>();
         dCoca = new Deposito<CocaCola>();
         dSprite = new Deposito<Sprite>();
         dSnickers = new Deposito<Snickers>();
@@ -61,7 +66,7 @@ class Expendedor{
     * @throws Tarea1.NoHayProductoException (si el producto solicitado no esta disponible en el deposito)
     */    
 
-    public Producto comprarProducto(Moneda mon, int sele) throws PagoInsuficienteException, PagoIncorrectoException, NoHayProductoException {
+    public void comprarProducto(Moneda mon, int sele) throws PagoInsuficienteException, PagoIncorrectoException, NoHayProductoException {
         Producto ret = null;
         int vuelto = 0;
 
@@ -98,10 +103,12 @@ class Expendedor{
             for(int i = 0; i < vuelto; i++){
                 dVuelto.addObj(new Moneda100());
             }
+            dCompra.addObj(mon);
+            p = ret;
             mon = null;
         }
 
-        else{ //Si el no hay stock del producto solicitado lanza una excepcion.
+        else{ //Si no hay stock del producto solicitado lanza una excepción.
             for(int i = 0; i < mon.getValor()/100; i++){
                 dVuelto.addObj(new Moneda100());
             }
@@ -109,7 +116,6 @@ class Expendedor{
             throw new NoHayProductoException("El producto solicitado no se encuentra disponible");
         }
 
-        return ret;
     }
     
     
@@ -118,5 +124,19 @@ class Expendedor{
     */    
     public Moneda getVuelto(){
         return dVuelto.getObj();
+    }
+/*Método getProducto
+    * @return Tiene retorno vacío pero simula el retiro del producto por parte del comprador.
+    */
+    public void getProducto(){
+
+        p = null;
+    }
+/*Método getP
+    * @return retorna el producto comprado exitosamente o null en caso contrario.
+    */
+    public Producto getP(){
+        
+        return p;
     }
 }
