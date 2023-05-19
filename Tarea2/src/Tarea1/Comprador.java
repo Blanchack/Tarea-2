@@ -8,25 +8,18 @@ package Tarea1;
  * @see PagoIncorrectoException
  */
 
-class Comprador{
-    private String sonido;
-    private int vuelto;
-    
-    /** Metodo constructor clase Tarea1.Comprador
-    * @param m primero Moneda 
-    * @param productoId segundo int
-    * @param ex tercero Expendedor
-    * @throws PagoIncorrectoException  puede lanzar esta excepción si la moneda ingresada no es valida (null).
-    */
-
-    public Comprador(Moneda m, int productoId, Expendedor ex) throws PagoIncorrectoException, PagoInsuficienteException, NoHayProductoException {
+public Comprador(Moneda m, int productoId, Expendedor ex) throws PagoIncorrectoException, PagoInsuficienteException, NoHayProductoException {
         vuelto = 0;
         sonido = "null";
         
         if( m ==  null){ 
             throw new PagoIncorrectoException("Se intento comprar sin moneda"); 
         }
-        Producto p = ex.comprarProducto(m, productoId);
+
+        ex.comprarProducto(m, productoId);
+
+        Producto p = ex.getP();
+
         if(p != null) {
             sonido = p.consumir();
         }
