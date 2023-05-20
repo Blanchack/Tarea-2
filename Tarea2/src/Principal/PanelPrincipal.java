@@ -14,15 +14,11 @@ class PanelPrincipal extends JPanel {
 
         exp = new PanelExpendedor();
         com = new PanelComprador();
-        this.setSize(800,550);
-        this.setBackground(Color.GRAY);
-    }
-    public void paint (Graphics g){
-        super.paint(g);
-        
 
-        exp.paint(g);
-        //com.paint(g);
+        this.add(com);
+
+        this.setSize(800,550);
+
     }
 }
 

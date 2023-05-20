@@ -13,7 +13,7 @@ public class BotonesItems extends JPanel {
 
     ButtonGroup group;
 
-    BotonesItems(){
+    public BotonesItems(){
         sprite = new RadioButtonConImagen("res/sprite.png", 100, 100);
         coca = new RadioButtonConImagen("res/coca.png", 100, 100);
         snickers = new RadioButtonConImagen("res/snickers.png", 100, 100);

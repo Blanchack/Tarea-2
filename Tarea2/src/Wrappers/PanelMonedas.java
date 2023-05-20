@@ -15,11 +15,11 @@ public class PanelMonedas extends JPanel {
 
     ButtonGroup group;
 
-    BotonesMonedas(){
+    public PanelMonedas(){
         m100 = new RadioButtonConImagen("res/100.png", 100, 100);
         m500 = new RadioButtonConImagen("res/500.png", 100, 100);
-        m1000 = new RadioButtonConImagen("res/1000.jpg", 100, 100);
-        m1500 = new RadioButtonConImagen("res/1500.jpg", 100, 100);
+        m1000 = new RadioButtonConImagen("res/1000.jpg", 100, 50);
+        m1500 = new RadioButtonConImagen("res/1500.jpg", 100, 50);
 
         this.setLayout(new GridLayout(2, 2));
 
