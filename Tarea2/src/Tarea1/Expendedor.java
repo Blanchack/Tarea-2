@@ -10,7 +10,7 @@ import Tarea1.Deposito;
  * @version versión 1, 28 de abril de 2023
  * @see PagoInsuficienteException , PagoIncorrectoException , NoHayProductoException
  */
-class Expendedor{
+public class Expendedor{
     
     /*Constantes utilizadas en la selección del producto.*/
     public static final int COCA = 1;
