@@ -6,23 +6,30 @@ import Wrappers.PanelComprador;
 import javax.swing.*;
 import java.awt.*;
 
-class PanelPrincipal extends JPanel {
+public class PanelPrincipal extends JPanel {
 
     private PanelComprador com;
     private PanelExpendedor exp;
     public PanelPrincipal(){
-
+        this.setLayout(null);
         exp = new PanelExpendedor();
         com = new PanelComprador();
-        this.setSize(800,550);
-        this.setBackground(Color.GRAY);
+        this.setBounds(0,0,970,550);
+        this.add(exp);
+        this.add(com);
+        this.setBackground(Color.BLUE);
     }
     public void paint (Graphics g){
         super.paint(g);
         
 
         exp.paint(g);
-        //com.paint(g);
+        com.paint(g);
     }
-}
 
+    public JPanel getPC(){
+
+        return com;
+    }
+
+}
