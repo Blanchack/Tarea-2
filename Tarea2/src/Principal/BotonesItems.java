@@ -6,10 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class BotonesItems extends JPanel {
-    RadioButtonConImagen sprite;
-    RadioButtonConImagen coca;
-    RadioButtonConImagen snickers;
-    RadioButtonConImagen super8;
+    private RadioButtonConImagen sprite;
+    private RadioButtonConImagen coca;
+    private RadioButtonConImagen snickers;
+    private RadioButtonConImagen super8;
 
     ButtonGroup group;
 

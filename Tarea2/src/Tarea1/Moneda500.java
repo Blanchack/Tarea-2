@@ -5,7 +5,7 @@ import Tarea1.Moneda;
 /**
  * Tarea1.Moneda con valor 500.
  */
-class Moneda500 extends Moneda {
+public class Moneda500 extends Moneda {
     public Moneda500(){
         super();
         super.valor = 500;

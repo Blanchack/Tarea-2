@@ -3,7 +3,7 @@ package Tarea1;
 /**
  * Clase Tarea1.Moneda, usada por Tarea1.Comprador y Tarea1.Expendedor.
  */
-abstract class Moneda implements Comparable<Moneda>{
+public abstract class Moneda implements Comparable<Moneda>{
 
     protected int valor;
     protected int serie;
