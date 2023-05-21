@@ -29,7 +29,11 @@ public class Expendedor{
     private Deposito<Sprite> dSprite;     //Déposito de bebida Sprite.
     private Deposito<Snickers> dSnickers; //Déposito de dulce Tarea1.Snickers.
     private Deposito<Super8> dSuper8;     //Déposito de dulce Super 8.
+
+    private Deposito<Moneda> dMonedas;     //Deposito de monedas usadas en compra.
     private Deposito<Moneda> dVuelto;     //Déposito de monedas.
+
+    private Producto compra;
 
     /*Método constructor clase Tarea1.Expendedor
     * @param n primero int
@@ -39,11 +43,14 @@ public class Expendedor{
     public Expendedor(int n, int precioB, int precioD){ //Presenta 3 entradas: cantidad de productos, precio de bebidas y precio de dulces.
         this.precioB = precioB;
         this.precioD = precioD;
+
         this.dVuelto = new Deposito<Moneda>();
         dCoca = new Deposito<CocaCola>();
         dSprite = new Deposito<Sprite>();
         dSnickers = new Deposito<Snickers>();
         dSuper8 = new Deposito<Super8>();
+        dMonedas = new Deposito<Moneda>();
+
         for(int i = 0; i < n; i++){
             dCoca.addObj(new CocaCola(100+i));
             dSprite.addObj(new Sprite(200 + i));
@@ -61,7 +68,7 @@ public class Expendedor{
     * @throws Tarea1.NoHayProductoException (si el producto solicitado no esta disponible en el deposito)
     */    
 
-    public Producto comprarProducto(Moneda mon, int sele) throws PagoInsuficienteException, PagoIncorrectoException, NoHayProductoException {
+    public void comprarProducto(Moneda mon, int sele) throws PagoInsuficienteException, PagoIncorrectoException, NoHayProductoException {
         Producto ret = null;
         int vuelto = 0;
 
@@ -94,22 +101,54 @@ public class Expendedor{
         }
 
         if(ret != null){ //Si la compra fue exitosa se crean monedas (deposito de monedas) para la devolucion de vuelto.
-            vuelto /= 100;
-            for(int i = 0; i < vuelto; i++){
-                dVuelto.addObj(new Moneda100());
+            int cont = 0;
+
+            //algoritmo para devolver el vuelto en menos monedas
+            while(vuelto != 0){
+                if(vuelto >= 1500){
+                    dVuelto.addObj(new Moneda1500(1500+cont));
+                    vuelto -= 1500;
+                }
+                else if(vuelto >= 1000){
+                    dVuelto.addObj(new Moneda1000(1000+cont));
+                    vuelto -= 1000;
+                }
+                else if(vuelto <= 500){
+                    dVuelto.addObj(new Moneda500(500+cont));
+                    vuelto -= 500;
+                }
+                else{
+                    dVuelto.addObj(new Moneda100(100+cont));
+                }
+                cont++;
             }
-            mon = null;
         }
 
         else{ //Si el no hay stock del producto solicitado lanza una excepcion.
-            for(int i = 0; i < mon.getValor()/100; i++){
-                dVuelto.addObj(new Moneda100());
+            int cont = 0;
+            while(vuelto != 0){
+                if(vuelto >= 1500){
+                    dVuelto.addObj(new Moneda1500(1500+cont));
+                    vuelto -= 1500;
+                }
+                else if(vuelto >= 1000){
+                    dVuelto.addObj(new Moneda1000(1000+cont));
+                    vuelto -= 1000;
+                }
+                else if(vuelto <= 500){
+                    dVuelto.addObj(new Moneda500(500+cont));
+                    vuelto -= 500;
+                }
+                else{
+                    dVuelto.addObj(new Moneda100(100+cont));
+                }
+                cont++;
             }
-            mon = null;
             throw new NoHayProductoException("El producto solicitado no se encuentra disponible");
         }
 
-        return ret;
+        dMonedas.addObj(mon);
+        compra = ret;
     }
     
     

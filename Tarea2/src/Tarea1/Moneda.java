@@ -8,10 +8,12 @@ public abstract class Moneda implements Comparable<Moneda>{
     protected int valor;
     protected int serie;
 
-    public Moneda(){
+    public Moneda(int serie){
+        this.serie = serie;
+        System.out.println("Se creo una moneda de valor " + valor + "de serie" + getSerie());
     }
-    public Moneda getSerie(){
-        return this;
+    public int getSerie(){
+        return serie;
     }
 
     public abstract int getValor();

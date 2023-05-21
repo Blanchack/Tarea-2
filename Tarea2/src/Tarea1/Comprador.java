@@ -26,7 +26,10 @@ class Comprador{
         if( m ==  null){ 
             throw new PagoIncorrectoException("Se intento comprar sin moneda"); 
         }
-        Producto p = ex.comprarProducto(m, productoId);
+        //Producto p = ex.comprarProducto(m, productoId);
+        //producto ya no se usa, ya que comprarProducto ahora es void
+        Producto p = null;
+
         if(p != null) {
             sonido = p.consumir();
         }

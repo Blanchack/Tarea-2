@@ -13,7 +13,7 @@ public class PanelExpendedor extends JPanel{
     }
 
     public void paint (Graphics g){
-        
+
     }
 
 }

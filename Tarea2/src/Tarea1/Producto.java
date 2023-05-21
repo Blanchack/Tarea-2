@@ -15,8 +15,8 @@ abstract class Producto { //Clase abstracta que pasara sus atributos y metodos a
     * @param serie primero int 
     */
     public Producto(int serie) {
-
         this.serie = serie;
+        System.out.println("Se creo un prducto con serie"+ getSerie());
     }
 
     // Metodo getSerie, retorna el numero de serie de un producto.
