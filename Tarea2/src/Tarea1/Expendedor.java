@@ -155,7 +155,10 @@ public class Expendedor{
  /*Método getVuelto
     * @return Retira una moneda(100) del deposito de monedas.
     */    
-    public Moneda getVuelto(){
-        return dVuelto.getObj();
+    public void getVuelto(){
+        dVuelto = new Deposito<Moneda>();
+    }
+    public void getProducto(){
+        compra = null;
     }
 }

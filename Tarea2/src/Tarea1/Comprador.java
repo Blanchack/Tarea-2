@@ -20,24 +20,7 @@ class Comprador{
     */
 
     public Comprador(Moneda m, int productoId, Expendedor ex) throws PagoIncorrectoException, PagoInsuficienteException, NoHayProductoException {
-        vuelto = 0;
-        sonido = "null";
-        
-        if( m ==  null){ 
-            throw new PagoIncorrectoException("Se intento comprar sin moneda"); 
-        }
-        //Producto p = ex.comprarProducto(m, productoId);
-        //producto ya no se usa, ya que comprarProducto ahora es void
-        Producto p = null;
-
-        if(p != null) {
-            sonido = p.consumir();
-        }
-        Moneda aux = ex.getVuelto();
-        while (aux != null){
-            vuelto += aux.getValor();
-            aux = ex.getVuelto();
-        }
+        //Ya no usamos comprador, todas las compras se hacen directamente a traves de la GUI
     }
     
     // Metodo cuantoVuelto, retorna el valor del vuelto retirado por el comprador.
