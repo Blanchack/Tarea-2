@@ -13,7 +13,7 @@ class PanelPrincipal extends JPanel {
     private PanelExpendedor exp;
     public PanelPrincipal(){
 
-        exp = new PanelExpendedor();
+        exp = new PanelExpendedor(640, 50);
         com = new PanelComprador();
 
         EmptyBorder espacio = new EmptyBorder(50,0,0,800);
@@ -22,13 +22,14 @@ class PanelPrincipal extends JPanel {
 
         this.add(exp);
 
-        this.setSize(800,550);
-
+        setVisible(true);
     }
+
 
     public void paint(Graphics g) {
         super.paint(g);
         exp.paint(g);
+        updateUI();
     }
 }
 

@@ -141,6 +141,7 @@ public class Expendedor{
                 }
                 else{
                     dVuelto.addObj(new Moneda100(100+cont));
+                    vuelto -= 100;
                 }
                 cont++;
             }
@@ -151,7 +152,25 @@ public class Expendedor{
         compra = ret;
     }
     
-    
+    public int getDepositSize(int type){
+        switch (type) {
+            case Expendedor.COCA: {
+                return dCoca.size();
+            }
+            case Expendedor.SPRITE: {
+                return dSprite.size();
+            }
+            case Expendedor.SNICKERS: {
+                return dSnickers.size();
+            }
+            case Expendedor.SUPER8: {
+                return dSuper8.size();
+            }
+        }
+        return -1;
+    }
+
+
  /*Método getVuelto
     * @return Retira una moneda(100) del deposito de monedas.
     */    

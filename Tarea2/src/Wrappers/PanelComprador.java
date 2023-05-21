@@ -20,9 +20,6 @@ public class PanelComprador extends JPanel{
         this.add(new JPanel());
         this.add(pm);
         this.add(comprarButton);
-
-
-        this.setSize(350,400);
-
+        setVisible(true);
     }
 }
