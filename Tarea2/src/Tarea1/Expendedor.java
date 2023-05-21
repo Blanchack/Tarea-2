@@ -101,49 +101,16 @@ public class Expendedor{
         }
 
         if(ret != null){ //Si la compra fue exitosa se crean monedas (deposito de monedas) para la devolucion de vuelto.
-            int cont = 0;
-
-            //algoritmo para devolver el vuelto en menos monedas
-            while(vuelto != 0){
-                if(vuelto >= 1500){
-                    dVuelto.addObj(new Moneda1500(1500+cont));
-                    vuelto -= 1500;
-                }
-                else if(vuelto >= 1000){
-                    dVuelto.addObj(new Moneda1000(1000+cont));
-                    vuelto -= 1000;
-                }
-                else if(vuelto <= 500){
-                    dVuelto.addObj(new Moneda500(500+cont));
-                    vuelto -= 500;
-                }
-                else{
-                    dVuelto.addObj(new Moneda100(100+cont));
-                }
-                cont++;
+            int cont = vuelto/100;
+            for(int i = 0; i < cont; i++){
+                dVuelto.addObj(new Moneda100(100+i));
             }
         }
 
         else{ //Si el no hay stock del producto solicitado lanza una excepcion.
-            int cont = 0;
-            while(vuelto != 0){
-                if(vuelto >= 1500){
-                    dVuelto.addObj(new Moneda1500(1500+cont));
-                    vuelto -= 1500;
-                }
-                else if(vuelto >= 1000){
-                    dVuelto.addObj(new Moneda1000(1000+cont));
-                    vuelto -= 1000;
-                }
-                else if(vuelto <= 500){
-                    dVuelto.addObj(new Moneda500(500+cont));
-                    vuelto -= 500;
-                }
-                else{
-                    dVuelto.addObj(new Moneda100(100+cont));
-                    vuelto -= 100;
-                }
-                cont++;
+            int cont = vuelto/100;
+            for(int i = 0; i < cont; i++){
+                dVuelto.addObj(new Moneda100(100+i));
             }
             throw new NoHayProductoException("El producto solicitado no se encuentra disponible");
         }
@@ -170,10 +137,13 @@ public class Expendedor{
         return -1;
     }
 
+    public int getSizeVuelto(){
+        return dVuelto.size();
+    }
 
  /*Método getVuelto
     * @return Retira una moneda(100) del deposito de monedas.
-    */    
+    */
     public void getVuelto(){
         dVuelto = new Deposito<Moneda>();
     }

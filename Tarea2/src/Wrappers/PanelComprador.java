@@ -15,6 +15,7 @@ public class PanelComprador extends JPanel{
     PanelMonedas pm;
     BotonesItems bi;
     JButton comprarButton;
+    JButton getVueltoButton;
 
     public PanelComprador(Expendedor exp){
         pm = new PanelMonedas();
@@ -37,11 +38,21 @@ public class PanelComprador extends JPanel{
             }
         });
 
+        getVueltoButton = new JButton("Toma tu vuelto");
+        getVueltoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                exp.getVuelto();
+                repaint();
+            }
+        });
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(bi);
         this.add(new JPanel());
         this.add(pm);
         this.add(comprarButton);
+        this.add(getVueltoButton);
 
 
         setVisible(true);
