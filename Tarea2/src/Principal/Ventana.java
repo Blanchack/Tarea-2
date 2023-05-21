@@ -12,7 +12,7 @@ class Ventana extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.add(Pp,BorderLayout.CENTER);
         Pb = new PanelBotones();
-        this.setSize(800,550);
+        this.setSize(1280,720);
         this.setVisible(true);
     }
 }
