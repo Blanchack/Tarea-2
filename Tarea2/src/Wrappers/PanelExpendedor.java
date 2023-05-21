@@ -39,6 +39,8 @@ public class PanelExpendedor extends JPanel{
         dSuper8.setSize(sizeSuper8);
     }
 
+    public Expendedor getExp(){return exp;}
+
     public void paint (Graphics g){
         g.setColor(Color.CYAN);
         g.fillRect(pos.x, pos.y, 430,430);

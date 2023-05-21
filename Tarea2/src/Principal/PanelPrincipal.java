@@ -14,7 +14,7 @@ class PanelPrincipal extends JPanel {
     public PanelPrincipal(){
 
         exp = new PanelExpendedor(640, 50);
-        com = new PanelComprador();
+        com = new PanelComprador(exp.getExp());
 
         EmptyBorder espacio = new EmptyBorder(50,0,0,800);
         com.setBorder(espacio);
