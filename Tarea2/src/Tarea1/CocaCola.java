@@ -9,7 +9,7 @@ import Tarea1.Bebida;
  * @version versión 1, 28 de abril de 2023
  */
 
-class CocaCola extends Bebida {
+public class CocaCola extends Bebida {
 
     /**Metodo constructor clase Tarea1.CocaCola.
      * @param s primero int

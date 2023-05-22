@@ -147,6 +147,10 @@ public class Expendedor{
     public void getVuelto(){
         dVuelto = new Deposito<Moneda>();
     }
+
+    public Producto getCompra(){
+        return compra;
+    }
     public void getProducto(){
         compra = null;
     }

@@ -16,8 +16,9 @@ public class PanelComprador extends JPanel{
     BotonesItems bi;
     JButton comprarButton;
     JButton getVueltoButton;
+    JButton getProductoButton;
 
-    public PanelComprador(Expendedor exp){
+    public PanelComprador(PanelExpendedor exp){
         pm = new PanelMonedas();
         bi = new BotonesItems();
 
@@ -26,7 +27,7 @@ public class PanelComprador extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    exp.comprarProducto(pm.monedaSeleccionada(), bi.idDelProductoSeleccionado());
+                    exp.getExp().comprarProducto(pm.monedaSeleccionada(), bi.idDelProductoSeleccionado());
                 } catch (PagoInsuficienteException ex) {
                     ex.printStackTrace();
                 } catch (PagoIncorrectoException ex) {
@@ -34,6 +35,7 @@ public class PanelComprador extends JPanel{
                 } catch (NoHayProductoException ex) {
                     ex.printStackTrace();
                 }
+                exp.getProducto();
                 repaint();
             }
         });
@@ -42,7 +44,16 @@ public class PanelComprador extends JPanel{
         getVueltoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                exp.getVuelto();
+                exp.getExp().getVuelto();
+                repaint();
+            }
+        });
+
+        getProductoButton = new JButton("Toma tu producto");
+        getProductoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                exp.sacarProducto();
                 repaint();
             }
         });
@@ -53,7 +64,7 @@ public class PanelComprador extends JPanel{
         this.add(pm);
         this.add(comprarButton);
         this.add(getVueltoButton);
-
+        this.add(getProductoButton);
 
         setVisible(true);
     }

@@ -1,6 +1,6 @@
 package Wrappers;
 
-import Tarea1.Expendedor;
+import Tarea1.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +15,8 @@ public class PanelExpendedor extends JPanel{
     PanelDepositos dSuper8;
     PanelDepositos dVuelto;
 
+    PanelProducto compra;
+
     public PanelExpendedor(int x, int y){
         pos = new Point(x, y);
 
@@ -27,11 +29,14 @@ public class PanelExpendedor extends JPanel{
 
         dVuelto = new PanelDepositos(100, pos.x + 440, pos.y);
 
+        compra = null;
+
+
         this.setBackground(Color.white);
         setVisible(true);
     }
 
-    public void setSizes(){
+    private void setSizes(){
         int sizeCoca = exp.getDepositSize(Expendedor.COCA);
         dCoca.setSize(sizeCoca);
         int sizeSprite = exp.getDepositSize(Expendedor.SPRITE);
@@ -43,6 +48,29 @@ public class PanelExpendedor extends JPanel{
 
         int sizeVuelto = exp.getSizeVuelto();
         dVuelto.setSize(sizeVuelto);
+    }
+
+    public void getProducto(){
+        Producto producto =  exp.getCompra();
+        int type = 0;
+        if(producto instanceof CocaCola){
+            type = Expendedor.COCA;
+        }
+        else if(producto instanceof Sprite){
+            type = Expendedor.SPRITE;
+        }
+        else if(producto instanceof Snickers){
+            type = Expendedor.SNICKERS;
+        }
+        else if(producto instanceof Super8){
+            type = Expendedor.SUPER8;
+        }
+        compra = new PanelProducto(1000,550, type);
+    }
+
+    public void sacarProducto(){
+        exp.getProducto();
+        compra = null;
     }
 
     public Expendedor getExp(){return exp;}
@@ -60,6 +88,13 @@ public class PanelExpendedor extends JPanel{
 
         g.drawString("Tu vuelto!", pos.x + 440 , pos.y-20);
         dVuelto.paint(g);
+
+        g.setColor(Color.LIGHT_GRAY);
+        g.fillRect(1000, 550, 100,100);
+
+        if(compra != null){
+            compra.paint(g);
+        }
     }
 
 }
