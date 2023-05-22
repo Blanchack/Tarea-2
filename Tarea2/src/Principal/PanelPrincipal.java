@@ -4,32 +4,32 @@ import Wrappers.PanelExpendedor;
 import Wrappers.PanelComprador;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class PanelPrincipal extends JPanel {
+class PanelPrincipal extends JPanel {
 
     private PanelComprador com;
     private PanelExpendedor exp;
     public PanelPrincipal(){
-        this.setLayout(null);
-        exp = new PanelExpendedor();
-        com = new PanelComprador();
-        this.setBounds(0,0,970,550);
-        this.add(exp);
+
+        exp = new PanelExpendedor(640, 50);
+        com = new PanelComprador(exp);
+
+        EmptyBorder espacio = new EmptyBorder(50,0,0,800);
+        com.setBorder(espacio);
         this.add(com);
-        this.setBackground(Color.BLUE);
+
+        this.add(exp);
+
+        setVisible(true);
     }
-    public void paint (Graphics g){
+
+
+    public void paint(Graphics g) {
         super.paint(g);
-        
-
         exp.paint(g);
-        com.paint(g);
+        updateUI();
     }
-
-    public JPanel getPC(){
-
-        return com;
-    }
-
 }
+

@@ -5,9 +5,9 @@ import Tarea1.Moneda;
 /**
  * Tarea1.Moneda con valor 1000
  */
-class Moneda1000 extends Moneda {
-    public Moneda1000(){
-        super();
+public class Moneda1000 extends Moneda {
+    public Moneda1000(int serie){
+        super(serie);
         super.valor = 1000;
     }
     public int getValor(){

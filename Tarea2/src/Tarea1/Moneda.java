@@ -3,15 +3,17 @@ package Tarea1;
 /**
  * Clase Tarea1.Moneda, usada por Tarea1.Comprador y Tarea1.Expendedor.
  */
-abstract class Moneda implements Comparable<Moneda>{
+public abstract class Moneda implements Comparable<Moneda>{
 
     protected int valor;
     protected int serie;
 
-    public Moneda(){
+    public Moneda(int serie){
+        this.serie = serie;
+        System.out.println("Se creo una moneda de serie" + getSerie());
     }
-    public Moneda getSerie(){
-        return this;
+    public int getSerie(){
+        return serie;
     }
 
     public abstract int getValor();

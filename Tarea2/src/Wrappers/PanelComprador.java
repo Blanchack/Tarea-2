@@ -1,24 +1,71 @@
 package Wrappers;
 
+import Principal.BotonesItems;
+import Tarea1.Expendedor;
+import Tarea1.NoHayProductoException;
+import Tarea1.PagoIncorrectoException;
+import Tarea1.PagoInsuficienteException;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PanelComprador extends JPanel{
+    PanelMonedas pm;
+    BotonesItems bi;
+    JButton comprarButton;
+    JButton getVueltoButton;
+    JButton getProductoButton;
 
-    public PanelComprador(){
+    public PanelComprador(PanelExpendedor exp){
+        pm = new PanelMonedas();
+        bi = new BotonesItems();
 
-        //this.setLayout(null);
-        this.setBounds(370,0,490,400);
-        this.setBackground(Color.green);
+        comprarButton = new JButton("Comprar");
+        comprarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    exp.getExp().comprarProducto(pm.monedaSeleccionada(), bi.idDelProductoSeleccionado());
+                } catch (PagoInsuficienteException ex) {
+                    ex.printStackTrace();
+                } catch (PagoIncorrectoException ex) {
+                    ex.printStackTrace();
+                } catch (NoHayProductoException ex) {
+                    ex.printStackTrace();
+                }
+                exp.getProducto();
+                repaint();
+            }
+        });
 
-    }
+        getVueltoButton = new JButton("Toma tu vuelto");
+        getVueltoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                exp.getExp().getVuelto();
+                repaint();
+            }
+        });
 
-    public void paint (Graphics g){
+        getProductoButton = new JButton("Toma tu producto");
+        getProductoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                exp.sacarProducto();
+                repaint();
+            }
+        });
 
-        g.setColor(Color.black);
-        g.drawRect(450,80,490,400);
-        g.setColor(Color.GREEN);
-        g.fillRect(451,81,488,398);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(bi);
+        this.add(new JPanel());
+        this.add(pm);
+        this.add(comprarButton);
+        this.add(getVueltoButton);
+        this.add(getProductoButton);
 
+        setVisible(true);
     }
 }

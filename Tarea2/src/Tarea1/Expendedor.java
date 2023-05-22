@@ -25,14 +25,15 @@ public class Expendedor{
     private int precioB; //Almacena el precio de cada bebida.
     private int precioD; //Almacena el precio de cada dulce.
 
-    private Producto p; //Almacena el producto en un depósito especial para su posterior retiro.
+    private Deposito<CocaCola> dCoca;     //Déposito de bebida Cocacola.
+    private Deposito<Sprite> dSprite;     //Déposito de bebida Sprite.
+    private Deposito<Snickers> dSnickers; //Déposito de dulce Tarea1.Snickers.
+    private Deposito<Super8> dSuper8;     //Déposito de dulce Super 8.
 
-    private Deposito<CocaCola> dCoca;     //Depósito de bebida CocaCola.
-    private Deposito<Sprite> dSprite;     //Depósito de bebida Sprite.
-    private Deposito<Snickers> dSnickers; //Depósito de dulce Tarea1.Snickers.
-    private Deposito<Super8> dSuper8;     //Depósito de dulce Super 8.
-    private Deposito<Moneda> dVuelto;     //Depósito de monedas.
-    private Deposito<Moneda> dCompra;  //Depósito de monedas compra exitosa.
+    private Deposito<Moneda> dMonedas;     //Deposito de monedas usadas en compra.
+    private Deposito<Moneda> dVuelto;     //Déposito de monedas.
+
+    private Producto compra;
 
     /*Método constructor clase Tarea1.Expendedor
     * @param n primero int
@@ -42,13 +43,14 @@ public class Expendedor{
     public Expendedor(int n, int precioB, int precioD){ //Presenta 3 entradas: cantidad de productos, precio de bebidas y precio de dulces.
         this.precioB = precioB;
         this.precioD = precioD;
-        this.p = null;
+
         this.dVuelto = new Deposito<Moneda>();
-        this.dCompra = new Deposito<Moneda>();
         dCoca = new Deposito<CocaCola>();
         dSprite = new Deposito<Sprite>();
         dSnickers = new Deposito<Snickers>();
         dSuper8 = new Deposito<Super8>();
+        dMonedas = new Deposito<Moneda>();
+
         for(int i = 0; i < n; i++){
             dCoca.addObj(new CocaCola(100+i));
             dSprite.addObj(new Sprite(200 + i));
@@ -99,44 +101,57 @@ public class Expendedor{
         }
 
         if(ret != null){ //Si la compra fue exitosa se crean monedas (deposito de monedas) para la devolucion de vuelto.
-            vuelto /= 100;
-            for(int i = 0; i < vuelto; i++){
-                dVuelto.addObj(new Moneda100());
+            int cont = vuelto/100;
+            for(int i = 0; i < cont; i++){
+                dVuelto.addObj(new Moneda100(100+i));
             }
-            dCompra.addObj(mon);
-            p = ret;
-            mon = null;
         }
 
-        else{ //Si no hay stock del producto solicitado lanza una excepción.
-            for(int i = 0; i < mon.getValor()/100; i++){
-                dVuelto.addObj(new Moneda100());
+        else{ //Si el no hay stock del producto solicitado lanza una excepcion.
+            int cont = vuelto/100;
+            for(int i = 0; i < cont; i++){
+                dVuelto.addObj(new Moneda100(100+i));
             }
-            mon = null;
             throw new NoHayProductoException("El producto solicitado no se encuentra disponible");
         }
 
+        dMonedas.addObj(mon);
+        compra = ret;
     }
     
-    
+    public int getDepositSize(int type){
+        switch (type) {
+            case Expendedor.COCA: {
+                return dCoca.size();
+            }
+            case Expendedor.SPRITE: {
+                return dSprite.size();
+            }
+            case Expendedor.SNICKERS: {
+                return dSnickers.size();
+            }
+            case Expendedor.SUPER8: {
+                return dSuper8.size();
+            }
+        }
+        return -1;
+    }
+
+    public int getSizeVuelto(){
+        return dVuelto.size();
+    }
+
  /*Método getVuelto
     * @return Retira una moneda(100) del deposito de monedas.
-    */    
-    public Moneda getVuelto(){
-        return dVuelto.getObj();
-    }
-/*Método getProducto
-    * @return Tiene retorno vacío pero simula el retiro del producto por parte del comprador.
     */
-    public void getProducto(){
+    public void getVuelto(){
+        dVuelto = new Deposito<Moneda>();
+    }
 
-        p = null;
+    public Producto getCompra(){
+        return compra;
     }
-/*Método getP
-    * @return retorna el producto comprado exitosamente o null en caso contrario.
-    */
-    public Producto getP(){
-        
-        return p;
+    public void getProducto(){
+        compra = null;
     }
 }

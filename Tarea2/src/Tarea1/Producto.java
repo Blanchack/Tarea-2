@@ -7,7 +7,7 @@ package Tarea1;
  * @version versión 1, 28 de abril de 2023
  */
 
-abstract class Producto { //Clase abstracta que pasara sus atributos y metodos a sus clases hijas Tarea1.Bebida y Tarea1.Dulce.
+public abstract class Producto { //Clase abstracta que pasara sus atributos y metodos a sus clases hijas Tarea1.Bebida y Tarea1.Dulce.
 
     private int serie; //Almacena un un numero entero que identifica a cada producto.
     
@@ -15,8 +15,8 @@ abstract class Producto { //Clase abstracta que pasara sus atributos y metodos a
     * @param serie primero int 
     */
     public Producto(int serie) {
-
         this.serie = serie;
+        System.out.println("Se creo un prducto con serie"+ getSerie());
     }
 
     // Metodo getSerie, retorna el numero de serie de un producto.

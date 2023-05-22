@@ -15,6 +15,7 @@ public class RadioButtonConImagen extends JPanel {
     public RadioButtonConImagen(String path, int ancho, int largo){
         ImageIcon Icon = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(ancho, largo, Image.SCALE_DEFAULT));
         imagen = new JLabel(Icon);
+        this.setBorder(marco);
         add(boton);
         add(imagen);
     }

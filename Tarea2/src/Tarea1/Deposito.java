@@ -21,6 +21,10 @@ class Deposito<T>{
         dep.add(bar);
     }
 
+    public int size(){
+        return dep.size();
+    }
+
     //Metodo getObj, retira elementos del deposito.
     public T getObj(){ 
         if (dep.size() == 0){
